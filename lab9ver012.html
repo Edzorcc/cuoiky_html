@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <title>Ed_Zorc</title>
+        <style>
+            th{
+                padding:20px;
+                color:white;
+                background-color: black;
+            }
+            th:hover{
+                color:red;
+            }
+            input[type=text]:focus {
+                background-color: black;
+                color:white;
+            }
+
+            textarea:focus{
+                background-color: black;
+                color:white;
+            }
+        </style>
+    </head>
+    <body> 
+        <script>
+            const namePattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\-]?).{3,}/
+            function myFunction(id) 
+            {
+                document.getElementById(id).style.background = "red";
+            }
+            function check() 
+            {
+                if(f.sl.value == "1")
+                {
+                    alert("Choose atleast one option in category choose!");
+                    return false;
+                }
+                if(!f.txtName.value.match(namePattern)) 
+                {
+                    f.txtName.focus();
+                    return false;
+                }
+
+                if(f.txtQuantity.value=="" || Number(f.txtQuantity.value) <= 0 || Number(f.txtQuantity.value) > 100) 
+                {
+                    f.txtQuantity.focus();
+                    return false;
+                }
+                if(f.txtPrice.value=="" || Number(f.txtPrice.value) <= 0)
+                { 
+                    f.txtPrice.focus();
+                    return false;
+                }
+                if(f.taI.value=="" || f.taI.value.length > 200) 
+                {
+                    f.taI.focus();
+                    return false;
+                }
+
+                var str = "";
+                switch(f.sl.value) 
+                {
+                    case "2": 
+                        str = "NOKIA"; 
+                        break; 
+                    case "3": 
+                        str = "SAMSUNG";
+                        break;
+                    case "4":
+                        str = "GL";
+                        break; 
+                    case "5": 
+                        str = "SONY";
+                        break; 
+                }
+                if(confirm("Message addnew production:\nProduct:" + f.txtName.value + " of category " + str + " has added to the database\n-Quantity:    " + f.txtQuantity.value + "\n-Price:    " + f.txtPrice.value + "$\n*The total money:  " + Number(f.txtPrice.value) * Number(f.txtQuantity.value) + "$")) 
+                {
+                    return true; 
+                }
+            }
+            
+            function ck() {
+                var checkBox = document.getElementById("chk");
+                var text = document.getElementById("text");
+                var text2 = document.getElementById("text2");
+        
+                if (checkBox.checked == true){
+                    text.style.display = "block";
+                    text2.style.display = "none"
+                } else {
+                    text.style.display = "none"
+                    text2.style.display = "block";
+                }
+            }
+
+
+        </script>
+        <form name="f" onsubmit="return check()">
+            <table width="450" align="center" cellpadding="5">
+                <tr>
+                    <th colspan="2">ADDNEW PRODUCTION</th>
+                </tr>
+                <tr>
+                    <td align="right" style="font-size:15px">Category Choose: </td>
+                    <td align="left">
+                        <select name="sl"> 
+                            <option value="1">[Select]</option>
+                            <option value="2">Nokia</option>
+                            <option value="3">Samsung</option>
+                            <option value="4">GL</option>
+                            <option value="5">Sony</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right" style="font-size:15px">Product Name: </td>
+                    <td align="left"><input type="text" name="txtName" style="width: 200px;" id="name"></td>
+                </tr>
+                
+                <tr>
+                    <td align="right" style="font-size:15px">Product Description: </td>
+                    <td align="left"><textarea style="width: 300px; height: 50px;" name="taD"></textarea></td>
+                </tr>
+                <tr>
+                    <td align="right" style="font-size:15px">Product Quantity: </td>
+                    <td align="left"><input type="text" name="txtQuantity" style="width: 100px;"><i>(possitive)</i></td>
+                </tr>
+                <tr>
+                    <td align="right" style="font-size:15px">Product Price: </td>
+                    <td align="left"><input type="text" name="txtPrice" style="width: 100px;"><i>($)</i></td>
+                </tr>
+                <tr>
+                    <td align="right" style="font-size:15px">Product Image: </td>
+                    <td align="left"><input type="text" name="txtImg" style="width: 170px;"> <input type="button" value="Browse.."></td>
+                </tr>
+                <tr>
+                    <td align="right" style="font-size:15px">Product Info: </td>
+                    <td align="left"><textarea style="width: 300px; height: 70px;" name="taI" placeholder="Enter your product Info..."></textarea></td>
+                </tr>
+                <tr>
+                    <td align="right" style="font-size:15px">Product Status: </td>
+                    <td align="left" style="color: lightcoral;"><input type="checkbox" name="cb" value="1" id="chk" onclick="ck()"><p id="text" style="display:none">Show</p><p id="text2" style="display:none">Hidden</p></td>
+                </tr>
+            </table>
+            <hr align="center" width="500px">
+            <table align="center" cellpadding="10" width="500px">
+                <tr>
+                    <td align="right">
+                        <input type="submit" value="Addnew"> 
+                    </td>
+                    <td align="left">
+                        <input type="reset" value="Reset">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
